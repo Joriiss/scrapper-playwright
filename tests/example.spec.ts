@@ -37,4 +37,3 @@ test('navigate and get H1 text', async ({ page }) => {
     console.error('Error sending data to backend:', error);
   }
 });
-*
