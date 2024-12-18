@@ -4,21 +4,14 @@ import { test, expect } from '@playwright/test';
 import fetch from 'node-fetch';
 
 test('navigate and get H1 text', async ({ page }) => {
-  // Navigate to the initial page.
-  await page.goto('https://volcasun.fr/');
-  
-  // Click on the "Blog" link.
-  await page.getByRole('link', { name: 'Blog' }).first().click();
-  
-  // Click on the first link in the article with specified text.
-  await page.locator('article').filter({ hasText: 'Photovoltaïque Meilleurs' }).getByRole('link').first().click();
-  
-  // Get the text of the H1 element.
-  const h1Text = await page.locator('h1').textContent();
-  console.log('H1 Text:', h1Text); // Print the H1 text to the console.
+  await page.goto('https://www.amazon.fr/');
+  await page.getByLabel('Accepter').click();
+  await page.getByRole('link', { name: 'Meilleures ventes' }).click();
+  await page.locator('.zg-carousel-general-faceout').first().click()
+  const title = await page.locator('#title').textContent()
 
   // Prepare the data to send to the backend.
-  const scrapedData = { h1Text };
+  const scrapedData = { title };
 
   // Send the scraped data to the backend.
   try {
